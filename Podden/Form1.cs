@@ -30,7 +30,6 @@ namespace Podden
             {
                 string[] kategorier = File.ReadAllLines("listBoxKategorier.txt");
                 listBox1.Items.AddRange(kategorier);
-                Console.WriteLine("hej");
             }
 
             // Läs in kategorierna från textfilen till comboBox2
