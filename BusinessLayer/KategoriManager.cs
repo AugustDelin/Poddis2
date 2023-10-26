@@ -43,6 +43,15 @@ public class KategoriManager
         return false;
     }
 
+    public int GetTotalCategories()
+    {
+        
+        List<string> categories = kategoriRepository.GetAll();
+
+        
+        return categories.Count;
+    }
+
     public List<string> GetAll()
     {
         return kategoriRepository.GetAll();

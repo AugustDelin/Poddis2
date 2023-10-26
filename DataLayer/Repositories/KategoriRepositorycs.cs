@@ -23,9 +23,17 @@ namespace DataLayer.Repositories
             SparaKategorier(); // Spara till filen
         }
 
+
+
         public List<string> GetAll()
         {
             return _kategorier; // Returnera samlingen
+        }
+
+        public List<string> GetAll(int maxItems)
+        {
+            // Returnera de första maxItems kategorierna från _kategorier.
+            return _kategorier.Take(maxItems).ToList();
         }
 
         public void Update(string nyttNamn, string gammaltNamn)
