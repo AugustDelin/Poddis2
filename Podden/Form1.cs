@@ -388,6 +388,8 @@ namespace Podden
             {
                 MessageBox.Show("Välj ett RSS-flöde att ta bort.");
             }
+            listBox2.Items.Clear();
+            textBox3.Clear();
         }
 
         private Rss GetRssItemByName(string namn)
