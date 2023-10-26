@@ -36,6 +36,15 @@ namespace BusinessLayer
 
         public async Task<Rss> CreateRss(string url, string namn, Kategori kategori, int avsnitt)
         {
+            // Anropa ValideraUri för att validera URL:en
+            bool urlIsValid = validator.ValideraUri(url, false); // Om URL:en inte får existera redan
+
+            if (!urlIsValid)
+            {
+                // URL:en är ogiltig, gör något (t.ex. returnera null eller kasta ett undantag)
+                return null;
+            }
+
             Rss feed = await rssRepository.ReadFeedAsync(url, namn, kategori, avsnitt);
 
             if (feed != null)

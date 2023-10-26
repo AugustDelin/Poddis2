@@ -7,6 +7,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
+
 
 namespace DataLayer.Validation
 {
@@ -45,26 +47,41 @@ namespace DataLayer.Validation
 
 
 
-        public bool ValideraUrl(string url)
+        public bool ValideraUri(string url, bool exists)
+        {
+            bool validation = true;
+
+            try
             {
                 if (string.IsNullOrEmpty(url))
                 {
-                    return false; 
+                    validation = false;
                 }
-
-                if (Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
-                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                if (exists)
                 {
-                    return true;
+                    
+                    validation = false;
                 }
-
-                return false;
+            }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine("Ett fel uppstod: " + ex.Message);
             }
 
+            return validation;
         }
+  
+
+
+
+
+
+
 
 
 
     }
+}
 
 
