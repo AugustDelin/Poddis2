@@ -95,12 +95,13 @@ namespace Podden
 
                 if (!string.IsNullOrEmpty(nyttKategoriNamn))
                 {
-                    int valtIndex = listBox1.SelectedIndex;
-                    string gammaltNamn = listBox1.Items[valtIndex].ToString();
-
-                    if (kategoriManager.AndraKategori(gammaltNamn, nyttKategoriNamn))
+                    
+                    if (kategoriManager.Add(nyttKategoriNamn))
                     {
-                        // Ta bort den gamla kategorin från textfilen
+                        int valtIndex = listBox1.SelectedIndex;
+                        string gammaltNamn = listBox1.Items[valtIndex].ToString();
+
+                        
                         TaBortKategoriFranTextfil(gammaltNamn);
 
                         listBox1.Items[valtIndex] = nyttKategoriNamn;
@@ -114,13 +115,11 @@ namespace Podden
                     }
                     else
                     {
-                        MessageBox.Show("Kunde inte ändra kategorin!");
+                        MessageBox.Show("Kunde inte ändra kategorin. Kategorinamn får inte innehålla specialtecken eller siffror.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Ange ett giltigt kategorinamn");
-                }
+                 
+                
             }
             else
             {
@@ -191,14 +190,25 @@ namespace Podden
 
             if (!string.IsNullOrEmpty(kategoriNamn))
             {
-                // Kontrollera om kategorin redan finns i listan
-                if (!listBox1.Items.Contains(kategoriNamn) && !comboBox2.Items.Contains(kategoriNamn))
+                // Kontrollera om kategorin redan finns i listBox1 (case-insensitiv jämförelse)
+                if (listBox1.Items.Cast<string>().Any(item => item.Equals(kategoriNamn, StringComparison.OrdinalIgnoreCase)))
                 {
-                    kategoriManager.Add(kategoriNamn);
-                    comboBox2.Items.Add(kategoriNamn);
-
-                    // Lägg till kategorin i listbox1
-                    listBox1.Items.Add(kategoriNamn);
+                    MessageBox.Show("Kategorinamnet finns redan i listan.");
+                }
+                else
+                {
+                    bool success = kategoriManager.Add(kategoriNamn);
+                    if (success)
+                    {
+                        // Kategorin lades till korrekt, så du kan utföra några handlingar här om det behövs.
+                        comboBox2.Items.Add(kategoriNamn);
+                        listBox1.Items.Add(kategoriNamn);
+                    }
+                    else
+                    {
+                        // Kategorin lades inte till korrekt, du kan visa ett meddelande här om det behövs.
+                        MessageBox.Show("Kunde inte lägga till kategorin. Den är ogiltig.");
+                    }
                 }
             }
         }

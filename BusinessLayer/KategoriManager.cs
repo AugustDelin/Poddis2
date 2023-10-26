@@ -5,6 +5,7 @@ using DataLayer.Repositories;
 using DataLayer.Validation;
 using Models;
 
+
 namespace BusinessLayer;
 
 
@@ -26,13 +27,19 @@ public class KategoriManager
 
     public bool Add(string kategoriNamn)
     {
-        if (validator.ValideraKategori(kategoriNamn))
+        try
         {
-            
+            if (validator.ValideraKategori(kategoriNamn))
+            {
                 kategoriRepository.Add(kategoriNamn);
                 return true;
-            
+            }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
         return false;
     }
 

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DataLayer.Validation
@@ -14,25 +17,35 @@ namespace DataLayer.Validation
 
         }
         public bool ValideraKategori(string kategoriNamn)
-
         {
+            bool valideringLyckades = true;
+
             try
             {
                 if (string.IsNullOrEmpty(kategoriNamn))
                 {
+                    valideringLyckades = false;
                     throw new Exception("Kategorinamn får inte vara tomt.");
                 }
 
-                return true;
+                if (Regex.IsMatch(kategoriNamn, @"[^a-zA-ZåäöÅÄÖ\s]"))
+                {
+                    valideringLyckades = false;
+                    throw new Exception("Kategorinamn får inte innehålla siffror eller specialtecken.");
+                }
             }
-
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                Console.WriteLine(ex.Message);
             }
+
+            return valideringLyckades;
         }
 
-            public bool ValideraUrl(string url)
+
+
+
+        public bool ValideraUrl(string url)
             {
                 if (string.IsNullOrEmpty(url))
                 {
