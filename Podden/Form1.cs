@@ -22,7 +22,7 @@ namespace Podden
             kategoriManager = new KategoriManager();
             rssManager = new RssManager();
             InitializeComponent();
-            
+
 
 
 
@@ -367,7 +367,7 @@ namespace Podden
             }
         }
 
-            private void btnTaBortRss_Click(object sender, EventArgs e)
+        private void btnTaBortRss_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -470,6 +470,57 @@ namespace Podden
                         textBox3.Text = "Ingen beskrivning tillgänglig.";
                     }
                 }
+            }
+        }
+
+        private void btnFiltrera_Click(object sender, EventArgs e)
+        {
+            string valdKategori = comboBox2.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(valdKategori))
+            {
+                // Om ingen kategori är vald, visa alla feeds
+                LoadSavedRssFeeds();
+            }
+            else
+            {
+                // Rensa befintliga poster i listView1
+                listView1.Items.Clear();
+
+                // Hämta RSS-flöden från din ListView och filtrera dem baserat på den valda kategorin
+                List<Rss> rssFeedsToDisplay = rssManager.GetRssData().Where(feed => feed.Kategori?.Namn == valdKategori).ToList();
+
+                foreach (Rss feed in rssFeedsToDisplay)
+                {
+                    // Lägg till filtrerade feeds i listView1
+                    ListViewItem listViewItem = new ListViewItem(feed.Namn);
+                    listViewItem.SubItems.Add(feed.Avsnitt.ToString());
+                    listViewItem.SubItems.Add(feed.URL);
+                    listViewItem.SubItems.Add(feed.Kategori != null ? feed.Kategori.Namn : "Okänd kategori");
+                    listView1.Items.Add(listViewItem);
+                }
+            }
+        }
+
+        private void btnAterstall_Click(object sender, EventArgs e)
+        {
+            // Återställ kategorival i comboBox2
+            comboBox2.SelectedItem = null;
+
+            // Rensa befintliga poster i listView1
+            listView1.Items.Clear();
+
+            // Ladda bara de ursprungliga sparade RSS-flöden och visa dem i listView1
+            List<Rss> originalRssFeeds = rssManager.GetRssData().Where(feed => !feed.IsDeleted).ToList();
+
+            foreach (Rss feed in originalRssFeeds)
+            {
+                // Lägg till de ursprungliga feeds i listView1
+                ListViewItem listViewItem = new ListViewItem(feed.Namn);
+                listViewItem.SubItems.Add(feed.Avsnitt.ToString());
+                listViewItem.SubItems.Add(feed.URL);
+                listViewItem.SubItems.Add(feed.Kategori != null ? feed.Kategori.Namn : "Okänd kategori");
+                listView1.Items.Add(listViewItem);
             }
         }
     }
