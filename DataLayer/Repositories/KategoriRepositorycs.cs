@@ -19,20 +19,17 @@ namespace DataLayer.Repositories
 
         public void Add(string kategoriNamn)
         {
-            _kategorier.Add(kategoriNamn); // Lägg till i samlingen
-            SparaKategorier(); // Spara till filen
+            _kategorier.Add(kategoriNamn);
+            SparaKategorier();
         }
-
-
 
         public List<string> GetAll()
         {
-            return _kategorier; // Returnera samlingen
+            return _kategorier;
         }
 
         public List<string> GetAll(int maxItems)
         {
-            // Returnera de första maxItems kategorierna från _kategorier.
             return _kategorier.Take(maxItems).ToList();
         }
 
@@ -42,14 +39,14 @@ namespace DataLayer.Repositories
             if (index >= 0)
             {
                 _kategorier[index] = nyttNamn;
-                SparaKategorier(); // Spara den uppdaterade samlingen
+                SparaKategorier();
             }
         }
 
         public void Delete(string kategoriNamn)
         {
             _kategorier.Remove(kategoriNamn);
-            SparaKategorier(); // Spara den uppdaterade samlingen
+            SparaKategorier();
         }
 
         public string GetByIndex(int index)
@@ -60,7 +57,7 @@ namespace DataLayer.Repositories
             }
             else
             {
-                return null; // Hantera ogiltigt index enligt ditt behov
+                return null;
             }
         }
 
@@ -85,111 +82,5 @@ namespace DataLayer.Repositories
         {
 
         }
-
-
-
-
-
-
-
-        //public void Add(string kategoriNamn)
-        //{
-        //    using (StreamWriter writer = File.AppendText(kategoriFil))
-        //    {
-        //        writer.WriteLine(kategoriNamn);
-        //    }
-        //}
-        //public void Create(string kategoriNamn)
-        //{
-
-        //}
-        
-
-        
-        //public List<string> GetAll()
-        //{
-        //    List<string> kategorier = new List<string>();
-
-        //    if (File.Exists(kategoriFil))
-        //    {
-        //        using (StreamReader reader = File.OpenText(kategoriFil))
-        //        {
-        //            string line;
-        //            while ((line = reader.ReadLine()) != null)
-        //            {
-        //                kategorier.Add(line);
-        //            }
-        //        }
-        //    }
-
-        //    return kategorier;
-
-        //}
-
-        //public void Update(string nyttNamn, string gammaltNamn)
-        //{
-        //    List<string> kategorier = GetAll();
-        //    int index = kategorier.FindIndex(k => k == gammaltNamn);
-        //    if (index >= 0)
-        //    {
-        //        kategorier[index] = nyttNamn;
-        //        SparaKategorier(kategorier);
-        //    }
-        //}
-
-
-
-        //public void Delete(string kategoriNamn)
-        //{
-        //    List<string> kategorier = GetAll();
-        //    if (kategorier.Contains(kategoriNamn))
-        //    {
-        //        kategorier.Remove(kategoriNamn);
-        //        SparaKategorier(kategorier);
-        //    }
-        //}
-
-        //public void SparaKategorier(List<string> kategorier)
-        //{
-        //    using (StreamWriter writer = new StreamWriter(kategoriFil))
-        //    {
-        //        foreach (string kategori in kategorier)
-        //        {
-        //            writer.WriteLine(kategori);
-        //        }
-        //    }
-        //}
-
-
-
-
-
-
-
-        //public Kategori GetByIndex(int index)
-        //{
-        //    if (index >= 0 && index < _kategorier.Count)
-        //    {
-        //        return _kategorier[index];
-        //    }
-        //    else
-        //    {
-        //        // Felhantering om index är ogiltigt.
-        //        // Du kan returnera null eller kasta ett undantag beroende på ditt programflöde.
-        //        return null;
-        //    }
-        //}
-
-
-
-
-
-
-
-
-
-
     }
-
-
 }

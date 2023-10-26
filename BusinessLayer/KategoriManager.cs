@@ -13,7 +13,6 @@ public class KategoriManager
 {
 
     private KategoriRepository kategoriRepository;
-    //KategoriRepository kategoriRepository;
     private Validator validator;
 
     public KategoriManager()
@@ -45,10 +44,10 @@ public class KategoriManager
 
     public int GetTotalCategories()
     {
-        
+
         List<string> categories = kategoriRepository.GetAll();
 
-        
+
         return categories.Count;
     }
 
@@ -68,13 +67,5 @@ public class KategoriManager
         kategoriRepository.Update(gammaltNamn, nyttNamn);
         return true;
     }
-
-    //public Kategori FindKategoriByIndex(int index)
-    //{
-    //    return kategoriRepository.GetByIndex(index);
-    //}
-
-
-
 }
 

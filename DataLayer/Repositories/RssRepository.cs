@@ -17,7 +17,7 @@ namespace DataLayer.Repositories
     {
 
         private string RssFil = "Rss.txt";
-        
+
 
         Serializer<Rss> rssSerializer;
         List<Rss> rssFeed;
@@ -72,7 +72,7 @@ namespace DataLayer.Repositories
 
         public void Delete(Rss item)
         {
-            rssFeed.Remove(item); 
+            rssFeed.Remove(item);
             SaveChanges();
         }
 
@@ -89,9 +89,9 @@ namespace DataLayer.Repositories
             }
             catch (Exception ex)
             {
-                // Hantera fel här, till exempel logga felmeddelandet.
+
                 Console.WriteLine("Fel vid hämtning av RSS-feed: " + ex.Message);
-                return null; // Ersätt detta med return Task.FromResult<Rss>(null);
+                return null;
             }
         }
 
@@ -101,14 +101,14 @@ namespace DataLayer.Repositories
             {
                 XElement xElement = XElement.Parse(xmlData);
 
-                // Extrahera URL från itunes:new-feed-url-elementet
+
                 string url = xElement.Descendants("{http://www.itunes.com/dtds/podcast-1.0.dtd}new-feed-url").FirstOrDefault()?.Value ?? string.Empty;
 
                 return new Rss(url, namn, kategori, avsnitt);
             }
             catch (Exception ex)
             {
-                // Hantera fel om XML-data inte kan parsas korrekt.
+
                 Console.WriteLine("Fel vid parsning av RSS-data: " + ex.Message);
                 return null;
             }
@@ -125,7 +125,7 @@ namespace DataLayer.Repositories
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(xmlData);
 
-                    // Hitta alla <item>-element och hämta <title> och <description> inom varje <item>
+
                     var titles = doc.SelectNodes("//item/title").Cast<XmlNode>()
                                     .Select(node => node.InnerText)
                                     .ToArray();
@@ -147,5 +147,5 @@ namespace DataLayer.Repositories
 
     }
 }
-    
+
 

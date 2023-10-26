@@ -44,9 +44,6 @@ namespace DataLayer.Validation
             return valideringLyckades;
         }
 
-
-
-
         public bool ValideraUri(string url, bool exists)
         {
             bool validation = true;
@@ -59,28 +56,18 @@ namespace DataLayer.Validation
                 }
                 if (exists)
                 {
-                    
+
                     validation = false;
                 }
             }
             catch (Exception ex)
             {
-               
+
                 Console.WriteLine("Ett fel uppstod: " + ex.Message);
             }
 
             return validation;
         }
-  
-
-
-
-
-
-
-
-
-
     }
 }
 

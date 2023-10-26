@@ -10,13 +10,10 @@ namespace DataAccessLayer
     public class RssGetter
     {
 
-        
         public RssGetter()
         {
 
         }
-
-        
 
         public List<Rss> GetRssFeed(string url)
         {
@@ -32,20 +29,20 @@ namespace DataAccessLayer
                     string title = item.Element("title")?.Value ?? "Title Not Found";
                     string description = item.Element("description")?.Value ?? "Description Not Found";
 
-                    
-                    string kategoriNamn = item.Element("category")?.Value ?? "Default Category Name";
-                    Kategori kategori = new Kategori(kategoriNamn); 
 
-                    
+                    string kategoriNamn = item.Element("category")?.Value ?? "Default Category Name";
+                    Kategori kategori = new Kategori(kategoriNamn);
+
+
                     int avsnitt;
                     if (int.TryParse(description, out avsnitt))
                     {
-                        Rss rssItem = new Rss(url, title, kategori, avsnitt); 
+                        Rss rssItem = new Rss(url, title, kategori, avsnitt);
                         rssList.Add(rssItem);
                     }
                     else
                     {
-                        
+
                         Console.WriteLine("Invalid 'Avsnitt' value: " + description);
                     }
                 }

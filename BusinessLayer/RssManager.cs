@@ -23,11 +23,10 @@ namespace BusinessLayer
             validator = new Validator();
         }
 
-   
+
 
         public List<Rss> GetRssData()
         {
-            // Här returnerar du den aktuella listan av RSS-flöden från rssRepository
             return rssRepository.GetRssData();
         }
 
@@ -36,12 +35,10 @@ namespace BusinessLayer
 
         public async Task<Rss> CreateRss(string url, string namn, Kategori kategori, int avsnitt)
         {
-            // Anropa ValideraUri för att validera URL:en
-            bool urlIsValid = validator.ValideraUri(url, false); // Om URL:en inte får existera redan
+            bool urlIsValid = validator.ValideraUri(url, false);
 
             if (!urlIsValid)
             {
-                // URL:en är ogiltig, gör något (t.ex. returnera null eller kasta ett undantag)
                 return null;
             }
 
@@ -57,7 +54,7 @@ namespace BusinessLayer
                 rssRepository.SaveChanges();
             }
 
-            return feed; // Returnera Rss-objektet
+            return feed;
         }
 
         public void SaveRssFeedsToTextFile(List<Rss> rssFeedsToSave)
@@ -67,9 +64,7 @@ namespace BusinessLayer
 
         public void DeleteRss(Rss rssItem)
         {
-           
             rssRepository.Delete(rssItem);
-            
         }
 
         public async Task<(string[] Titles, string[] Descriptions)> HämtaTitlarOchBeskrivningarFrånXML(string url)
@@ -78,5 +73,5 @@ namespace BusinessLayer
         }
 
     }
-    }
+}
 

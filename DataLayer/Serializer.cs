@@ -16,12 +16,12 @@ namespace DataLayer
 
         public Serializer(String fileName)
         {
-            this.fileName = fileName; 
+            this.fileName = fileName;
         }
-  
-    public void Serialize(List<T> list)
+
+        public void Serialize(List<T> list)
         {
-            XmlSerializer serializer= new XmlSerializer(typeof(List<T>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
 
             using (FileStream xmlOut = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
@@ -36,7 +36,8 @@ namespace DataLayer
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
 
-            try {
+            try
+            {
 
 
                 using (FileStream xmlIn = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -44,23 +45,17 @@ namespace DataLayer
                     listan = (List<T>)xmlSerializer.Deserialize(xmlIn);
                 }
             }
-            
+
             catch (FileNotFoundException)
             {
                 Console.WriteLine("Filen hittades inte");
                 listan = new List<T>();
             }
-             catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message, "Filen hittades inte");
             }
             return listan;
         }
-
-       
-    
     }
-
-
-
 }
