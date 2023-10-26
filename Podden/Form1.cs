@@ -22,6 +22,7 @@ namespace Podden
             kategoriManager = new KategoriManager();
             rssManager = new RssManager();
             InitializeComponent();
+            
 
 
 
