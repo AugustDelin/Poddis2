@@ -147,13 +147,6 @@ namespace Podden
             }
         }
 
-
-
-
-
-
-
-
         private void button6_Click(object sender, EventArgs e)
         {
             string kategoriNamn = textBox4.Text.Trim();
@@ -183,8 +176,6 @@ namespace Podden
                 }
             }
         }
-
-
 
         private async void btnLaggaTillRss_Click(object sender, EventArgs e)
         {
@@ -256,8 +247,6 @@ namespace Podden
                 listView1.Items.Add(listViewItem);
             }
         }
-
-
 
         private int HämtaAntalAvsnittFrånRSS(string url)
         {

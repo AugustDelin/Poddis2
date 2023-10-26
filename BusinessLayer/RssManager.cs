@@ -23,15 +23,10 @@ namespace BusinessLayer
             validator = new Validator();
         }
 
-
-
         public List<Rss> GetRssData()
         {
             return rssRepository.GetRssData();
         }
-
-
-
 
         public async Task<Rss> CreateRss(string url, string namn, Kategori kategori, int avsnitt)
         {
