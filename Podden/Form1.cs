@@ -427,7 +427,7 @@ namespace Podden
                 {
                     // Uppdatera informationen baserat på användarinput
                     valtRss.Namn = txtNamn.Text;
-                    valtRss.URL = txtUrl.Text;
+                    
 
                     // Hämta den valda kategorin från ComboBox
                     string nyKategoriNamn = comboBox2.SelectedItem?.ToString();
@@ -442,7 +442,7 @@ namespace Podden
 
                     // Uppdatera ListView för att visa de nya ändringarna
                     selectedItem.SubItems[0].Text = valtRss.Namn;
-                    selectedItem.SubItems[2].Text = valtRss.URL;
+                    
                     selectedItem.SubItems[3].Text = valtRss.Kategori != null ? valtRss.Kategori.Namn : "Okänd kategori";
                 }
             }
