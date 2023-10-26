@@ -95,13 +95,13 @@ namespace Podden
 
                 if (!string.IsNullOrEmpty(nyttKategoriNamn))
                 {
-                    
+
                     if (kategoriManager.Add(nyttKategoriNamn))
                     {
                         int valtIndex = listBox1.SelectedIndex;
                         string gammaltNamn = listBox1.Items[valtIndex].ToString();
 
-                        
+
                         TaBortKategoriFranTextfil(gammaltNamn);
 
                         listBox1.Items[valtIndex] = nyttKategoriNamn;
@@ -118,8 +118,8 @@ namespace Podden
                         MessageBox.Show("Kunde inte ändra kategorin. Kategorinamn får inte innehålla specialtecken eller siffror.");
                     }
                 }
-                 
-                
+
+
             }
             else
             {
@@ -213,22 +213,7 @@ namespace Podden
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void txtUrl_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private async void btnLaggaTillRss_Click(object sender, EventArgs e)
         {
@@ -427,7 +412,7 @@ namespace Podden
                 {
                     // Uppdatera informationen baserat på användarinput
                     valtRss.Namn = txtNamn.Text;
-                    valtRss.URL = txtUrl.Text;
+
 
                     // Hämta den valda kategorin från ComboBox
                     string nyKategoriNamn = comboBox2.SelectedItem?.ToString();
@@ -442,7 +427,7 @@ namespace Podden
 
                     // Uppdatera ListView för att visa de nya ändringarna
                     selectedItem.SubItems[0].Text = valtRss.Namn;
-                    selectedItem.SubItems[2].Text = valtRss.URL;
+
                     selectedItem.SubItems[3].Text = valtRss.Kategori != null ? valtRss.Kategori.Namn : "Okänd kategori";
                 }
             }

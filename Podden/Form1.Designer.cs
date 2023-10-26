@@ -181,7 +181,7 @@
             txtUrl.Name = "txtUrl";
             txtUrl.Size = new Size(210, 31);
             txtUrl.TabIndex = 31;
-            txtUrl.TextChanged += txtUrl_TextChanged;
+
             // 
             // label4
             // 
@@ -234,7 +234,7 @@
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(133, 33);
             comboBox2.TabIndex = 26;
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+
             // 
             // txtNamn
             // 
