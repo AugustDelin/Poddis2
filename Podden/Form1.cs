@@ -181,17 +181,18 @@ namespace Podden
         {
             string url = txtUrl.Text;
             string namn = txtNamn.Text;
+            string valdKategori = comboBox2.SelectedItem?.ToString(); 
 
-            if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(namn))
+            if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(namn) || string.IsNullOrEmpty(valdKategori))
             {
-                MessageBox.Show("Fyll i både URL och namn.");
+                MessageBox.Show("Fyll i både URL, namn och välj en kategori.");
                 return;
             }
 
             try
             {
                 int avsnitt = HämtaAntalAvsnittFrånRSS(url);
-                Rss feed = await rssManager.CreateRss(url, namn, new Kategori("Okänd kategori"), avsnitt);
+                Rss feed = await rssManager.CreateRss(url, namn, new Kategori(valdKategori), avsnitt); 
 
                 if (feed != null)
                 {
@@ -214,7 +215,6 @@ namespace Podden
                 MessageBox.Show("Ett fel uppstod vid hämtning av RSS-feed: " + ex.Message);
             }
         }
-
 
         private void SaveRssFeedsToTextFile()
         {
