@@ -220,53 +220,43 @@ namespace Podden
             string url = txtUrl.Text;
             string namn = txtNamn.Text;
 
-            if (!string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(namn))
-            {
-                string kategoriNamn = comboBox2.SelectedItem?.ToString() ?? "Okänd kategori";
-
-                try
-                {
-
-                    int avsnitt = HämtaAntalAvsnittFrånRSS(url);
-                    Rss feed = await rssManager.CreateRss(url, namn, new Kategori(kategoriNamn), avsnitt);
-
-                    if (feed != null)
-                    {
-
-
-                        ListViewItem listViewItem = new ListViewItem(feed.Namn);
-                        listViewItem.SubItems.Add(feed.Avsnitt.ToString());
-                        listViewItem.SubItems.Add(url);
-
-                        if (feed.Kategori != null)
-                        {
-                            listViewItem.SubItems.Add(feed.Kategori.Namn);
-                        }
-                        else
-                        {
-                            listViewItem.SubItems.Add("Okänd kategori");
-                        }
-
-                        listView1.Items.Add(listViewItem);
-
-
-
-
-                        txtUrl.Clear();
-                        txtNamn.Clear();
-                        comboBox2.SelectedItem = null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ett fel uppstod vid hämtning av RSS-feed: " + ex.Message);
-                }
-            }
-            else
+            if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(namn))
             {
                 MessageBox.Show("Fyll i både URL och namn.");
+                return; // Avsluta metoden om något av fälten är tomt
+            }
+
+            try
+            {
+                int avsnitt = HämtaAntalAvsnittFrånRSS(url);
+
+                Rss feed = await rssManager.CreateRss(url, namn, new Kategori("Okänd kategori"), avsnitt);
+
+                if (feed != null)
+                {
+                    // Skapa ett ListViewItem och lägg till det i listView1
+                    ListViewItem listViewItem = new ListViewItem(feed.Namn);
+                    listViewItem.SubItems.Add(feed.Avsnitt.ToString());
+                    listViewItem.SubItems.Add(url);
+                    listViewItem.SubItems.Add(feed.Kategori != null ? feed.Kategori.Namn : "Okänd kategori");
+                    listView1.Items.Add(listViewItem);
+
+                    // Rensa textfälten och ComboBox
+                    txtUrl.Clear();
+                    txtNamn.Clear();
+                    comboBox2.SelectedItem = null;
+                }
+                else
+                {
+                    MessageBox.Show("Det gick inte att lägga till RSS-feed. Kontrollera att URL:en är giltig.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ett fel uppstod vid hämtning av RSS-feed: " + ex.Message);
             }
         }
+
 
         private void SaveRssFeedsToTextFile()
         {
