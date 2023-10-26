@@ -55,6 +55,7 @@
             btnAterstall = new Button();
             label6 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            label7 = new Label();
             SuspendLayout();
             // 
             // textBox4
@@ -181,7 +182,6 @@
             txtUrl.Name = "txtUrl";
             txtUrl.Size = new Size(210, 31);
             txtUrl.TabIndex = 31;
-
             // 
             // label4
             // 
@@ -234,7 +234,6 @@
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(133, 33);
             comboBox2.TabIndex = 26;
-
             // 
             // txtNamn
             // 
@@ -302,11 +301,21 @@
             label6.TabIndex = 43;
             label6.Text = "Sortera kategori";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(1209, 114);
+            label7.Name = "label7";
+            label7.Size = new Size(59, 25);
+            label7.TabIndex = 44;
+            label7.Text = "label7";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1759, 808);
+            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(btnAterstall);
             Controls.Add(btnFiltrera);
@@ -365,5 +374,6 @@
         private Button btnAterstall;
         private Label label6;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Label label7;
     }
 }

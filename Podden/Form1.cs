@@ -22,6 +22,7 @@ namespace Podden
             kategoriManager = new KategoriManager();
             rssManager = new RssManager();
             InitializeComponent();
+         
 
 
 
@@ -44,6 +45,7 @@ namespace Podden
 
             UppdateraKategorierListBox();
             LoadSavedRssFeeds();
+            label7.Text = "Antalet kategorier: " + kategoriManager.GetTotalCategories();
         }
 
         private void UppdateraKategorierListBox()
@@ -92,6 +94,7 @@ namespace Podden
             if (listBox1.SelectedIndex != -1)
             {
                 string nyttKategoriNamn = textBox4.Text.Trim();
+                
 
                 if (!string.IsNullOrEmpty(nyttKategoriNamn))
                 {
@@ -112,6 +115,7 @@ namespace Podden
                             int comboBox2Index = comboBox2.Items.IndexOf(gammaltNamn);
                             comboBox2.Items[comboBox2Index] = nyttKategoriNamn;
                         }
+                        
                     }
                     else
                     {
@@ -161,6 +165,7 @@ namespace Podden
 
 
                         kategoriManager.Delete(valdKategori);
+                        label7.Text = "Antalet kategorier: " + kategoriManager.GetTotalCategories();
                     }
                     else
                     {
@@ -203,6 +208,7 @@ namespace Podden
                         // Kategorin lades till korrekt, så du kan utföra några handlingar här om det behövs.
                         comboBox2.Items.Add(kategoriNamn);
                         listBox1.Items.Add(kategoriNamn);
+                        label7.Text = "Antalet kategorier: " + kategoriManager.GetTotalCategories();
                     }
                     else
                     {
