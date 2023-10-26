@@ -41,6 +41,7 @@ namespace BusinessLayer
 
             if (feed != null)
             {
+                feed.URL = url; 
                 if (!string.IsNullOrEmpty(namn))
                 {
                     feed.Namn = namn;
@@ -51,6 +52,7 @@ namespace BusinessLayer
 
             return feed;
         }
+
 
         public void SaveRssFeedsToTextFile(List<Rss> rssFeedsToSave)
         {
