@@ -371,6 +371,7 @@ namespace Podden
 
             if (string.IsNullOrEmpty(valdKategori))
             {
+                listView1.Items.Clear();
                 LoadSavedRssFeeds();
             }
             else
